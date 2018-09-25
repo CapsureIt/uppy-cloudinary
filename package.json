@@ -1,6 +1,6 @@
 {
-  "name": "uppy-cloudinary",
-  "version": "0.0.1",
+  "name": "@evanminto/uppy-cloudinary",
+  "version": "0.0.2",
   "description": "Upload to Cloudinary with Uppy",
   "main": "dist/index.js",
   "scripts": {
