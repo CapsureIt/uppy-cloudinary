@@ -14,7 +14,6 @@ export default class CloudinaryPlugin extends Plugin {
    * @param {String}    [options.uploadPreset]
    * @param {String}    [options.apiKey]
    * @param {String}    [options.folder]
-   * @param {String}    [options.cloudName]
    * @param {String[]}  [options.tags]
    * @param {Function}  [options.generateSignature]
    */
