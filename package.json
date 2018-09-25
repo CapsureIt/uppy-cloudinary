@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.config.js",
-    "prepublish": "npm run-script build"
+    "prepare": "npm run-script build"
   },
   "repository": {
     "type": "git",
