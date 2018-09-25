@@ -1,0 +1,30 @@
+{
+  "name": "uppy-cloudinary",
+  "version": "0.0.1",
+  "description": "Upload to Cloudinary with Uppy",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js",
+    "prepublish": "npm run-script build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evanminto/uppy-cloudinary.git"
+  },
+  "author": "vamptvo@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/evanminto/uppy-cloudinary/issues"
+  },
+  "homepage": "https://github.com/evanminto/uppy-cloudinary#readme",
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@uppy/core": "^0.27.2",
+    "babel-loader": "^8.0.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.1"
+  }
+}
