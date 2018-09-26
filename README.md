@@ -6,7 +6,7 @@ via [Uppy](https://uppy.io/).
 
 Install via NPM:
 ```bash
-npm install --save @CapsureIt/uppy-cloudinary
+npm install --save @capsureit/uppy-cloudinary
 ```
 
 Use it in your project:
