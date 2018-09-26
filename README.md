@@ -12,9 +12,9 @@ npm install --save @CapsureIt/uppy-cloudinary
 Use it in your project:
 ```javascript
 // Import via ES Modules
-import CloudinaryPlugin from '@CapsureIt/uppy-cloudinary';
+import CloudinaryPlugin from '@capsureit/uppy-cloudinary';
 // Or Common JS
-const CloudinaryPlugin = require('@CapsureIt/uppy-cloudinary');
+const CloudinaryPlugin = require('@capsureit/uppy-cloudinary');
 
 // Use it on your Uppy instance
 uppy.use(CloudinaryPlugin, {
