@@ -2,10 +2,11 @@
   "name": "@evanminto/uppy-cloudinary",
   "version": "0.0.2",
   "description": "Upload to Cloudinary with Uppy",
-  "main": "dist/index.js",
+  "main": "dist/common.js",
+  "jsnext:main": "dist/esm.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.config.js",
+    "build": "rollup --config rollup.cjs.config.js && rollup --config rollup.esm.config.js",
     "prepare": "npm run-script build"
   },
   "repository": {
@@ -21,10 +22,15 @@
   "devDependencies": {
     "@babel/core": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
-    "@uppy/core": "^0.27.2",
     "babel-loader": "^8.0.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-polyfill": "^6.26.0",
+    "rollup": "^0.66.2",
+    "rollup-plugin-babel": "^4.0.3",
     "webpack": "^4.19.1",
     "webpack-cli": "^3.1.1"
+  },
+  "dependencies": {
+    "@uppy/core": "^0.27.2"
   }
 }
