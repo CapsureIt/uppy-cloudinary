@@ -1,5 +1,34 @@
 import sendPostRequest from './sendPostRequest';
 
+const baseUrl = 'https://api.cloudinary.com/v1_1';
+
+/**
+ * @param {File|Blob} file
+ * @returns {String}
+ */
+function getResourceType(file) {
+  if (file instanceof File) {
+    if (file.type.match(/^image\//)) {
+      return 'image';
+    } else if (file.type.match(/^video\//)) {
+      return 'video';
+    }
+  }
+
+  return 'auto';
+}
+
+/**
+ * @param {String}    cloudName
+ * @param {File|Blob} file
+ * @returns {String}
+ */
+function getUploadUrl(cloudName, file) {
+  const type = getResourceType(file);
+
+  return `${baseUrl}/${cloudName}/${type}/upload`;
+}
+
 /**
  * Client for communicating with the Cloudinary API.
  */
@@ -31,37 +60,12 @@ export default class CloudinaryApiClient {
   }
 
   /**
-   * @param {File|Blob} file
-   * @returns {String}
-   */
-  getResourceType(file) {
-    if (file instanceof File) {
-      if (file.type.match(/^image\//)) {
-        return 'image';
-      } else if (file.type.match(/^video\//)) {
-        return 'video';
-      }
-    }
-
-    return 'auto';
-  }
-
-  /**
-   * @param {File|Blob} file
-   * @returns {String}
-   */
-  getUploadUrl(file) {
-    const type = this.getResourceType(file);
-
-    return `https://api.cloudinary.com/v1_1/${this.cloudName}/${type}/upload`;
-  }
-
-  /**
    * Uploads a file to Cloudinary.
    *
    * @param {File|Blob} file
    * @param {Object}    options
    * @param {Function}  [options.onUploadProgress] Accepts one ProgressEvent argument
+   * @returns {Promise<Object>} JSON response data
    */
   async upload(file, { onUploadProgress = undefined }) {
     const params = {
@@ -74,7 +78,7 @@ export default class CloudinaryApiClient {
     const signature = await this.generateSignature(params);
 
     if (!signature) {
-      throw Error('Could not generate signature');
+      throw new Error('Could not generate signature');
     }
 
     params.signature = signature;
@@ -82,7 +86,7 @@ export default class CloudinaryApiClient {
     params.file = file;
 
     const responseText = await sendPostRequest(
-      this.getUploadUrl(file),
+      getUploadUrl(this.cloudName, file),
       params,
       {
         onUploadProgress

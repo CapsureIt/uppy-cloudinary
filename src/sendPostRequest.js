@@ -5,10 +5,18 @@
  * @param {Object}    params                      Body parameters
  * @param {Object}    options
  * @param {Function}  [options.onUploadProgress]  Accepts one ProgressEvent argument
- * @return {Promise<String>}
+ * @return {Promise<String>} Resolves to the response text
  */
 export default function sendPostRequest(url, params = {}, { onUploadProgress }) {
   return new Promise((resolve, reject) => {
+    if (!url || typeof url !== 'string') {
+      reject(new Error('URL must be a string.'));
+    }
+
+    if (!params || typeof params !== 'object') {
+      reject(new Error('Params must be an object.'))
+    }
+
     const xhr = new XMLHttpRequest();
     const fd = new FormData();
 
@@ -19,7 +27,7 @@ export default function sendPostRequest(url, params = {}, { onUploadProgress }) 
     xhr.open('POST', url, true);
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 
-    if (onUploadProgress) {
+    if (onUploadProgress && typeof onUploadProgress === 'function') {
       xhr.upload.addEventListener('progress', onUploadProgress);
     }
 
