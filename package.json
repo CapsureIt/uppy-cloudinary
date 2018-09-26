@@ -1,6 +1,6 @@
 {
   "name": "@evanminto/uppy-cloudinary",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Upload to Cloudinary with Uppy",
   "main": "dist/common.js",
   "jsnext:main": "dist/esm.js",
