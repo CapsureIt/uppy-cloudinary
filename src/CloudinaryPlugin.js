@@ -50,10 +50,17 @@ export default class CloudinaryPlugin extends Plugin {
   uploadFile = async fileId => {
     const file = this.uppy.getFile(fileId);
 
+    let uploadStarted = false;
+
     return this.apiClient.upload(file.data, {
       onUploadProgress: event => {
         if (!event.lengthComputable) {
           return;
+        }
+
+        if (!uploadStarted) {
+          this.uppy.emit('upload-started', file);
+          uploadStarted = true;
         }
 
         // Inform Uppy instance of the current progress
