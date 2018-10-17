@@ -58,6 +58,7 @@ export default class CloudinaryPlugin extends Plugin {
           return;
         }
 
+        // Inform uppy that the upload has started
         if (!uploadStarted) {
           this.uppy.emit('upload-started', file);
           uploadStarted = true;
@@ -70,6 +71,11 @@ export default class CloudinaryPlugin extends Plugin {
           bytesUploaded: event.loaded,
           bytesTotal: event.total
         });
+
+        // Inform Uppy that the upload is finished
+        if (event.loaded >= event.total) {
+          this.uppy.emit('upload-complete', file);
+        }
       }
     });
   };
