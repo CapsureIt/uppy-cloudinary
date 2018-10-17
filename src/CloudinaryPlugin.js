@@ -73,7 +73,7 @@ export default class CloudinaryPlugin extends Plugin {
         });
 
         // Inform Uppy that the upload is finished
-        if (event.loaded === event.total) {
+        if (event.loaded >= event.total) {
           this.uppy.emit('upload-complete', file);
         }
       }
