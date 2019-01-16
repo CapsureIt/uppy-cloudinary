@@ -1,6 +1,6 @@
-import { Plugin } from "@uppy/core";
+import { Plugin } from '@uppy/core';
 
-import CloudinaryApiClient from "./CloudinaryApiClient";
+import CloudinaryApiClient from './CloudinaryApiClient';
 
 /**
  * Uppy plugin that uploads selected files to Cloudinary.
@@ -31,8 +31,8 @@ export default class CloudinaryPlugin extends Plugin {
       generateSignature
     } = options;
 
-    this.id = id || "CloudinaryPlugin";
-    this.type = "uploader";
+    this.id = id || 'CloudinaryPlugin';
+    this.type = 'uploader';
 
     this.apiClient = new CloudinaryApiClient({
       apiKey: apiKey,
@@ -62,12 +62,12 @@ export default class CloudinaryPlugin extends Plugin {
 
         // Inform uppy that the upload has started
         if (!uploadStarted) {
-          this.uppy.emit("upload-started", file);
+          this.uppy.emit('upload-started', file);
           uploadStarted = true;
         }
 
         // Inform Uppy instance of the current progress
-        this.uppy.emit("upload-progress", file, {
+        this.uppy.emit('upload-progress', file, {
           id: fileId,
           uploader: this,
           bytesUploaded: event.loaded,
@@ -76,7 +76,7 @@ export default class CloudinaryPlugin extends Plugin {
 
         // Inform Uppy that the upload is finished
         if (event.loaded >= event.total) {
-          this.uppy.emit("upload-complete", file);
+          this.uppy.emit('upload-complete', file);
         }
       }
     });
