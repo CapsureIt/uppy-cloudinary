@@ -1,6 +1,6 @@
-import sendPostRequest from './sendPostRequest';
+import sendPostRequest from "./sendPostRequest";
 
-const baseUrl = 'https://api.cloudinary.com/v1_1';
+const baseUrl = "https://api.cloudinary.com/v1_1";
 
 /**
  * @param {File|Blob} file
@@ -9,13 +9,13 @@ const baseUrl = 'https://api.cloudinary.com/v1_1';
 function getResourceType(file) {
   if (file instanceof File) {
     if (file.type.match(/^image\//)) {
-      return 'image';
+      return "image";
     } else if (file.type.match(/^video\//)) {
-      return 'video';
+      return "video";
     }
   }
 
-  return 'auto';
+  return "auto";
 }
 
 /**
@@ -36,6 +36,7 @@ export default class CloudinaryApiClient {
   /**
    * @param {Object}    params
    * @param {String}    [params.cloudName]
+   * @param {Object}    [params.context]
    * @param {String}    [params.uploadPreset]
    * @param {String}    [params.apiKey]
    * @param {String}    [params.folder]
@@ -45,6 +46,7 @@ export default class CloudinaryApiClient {
    */
   constructor({
     cloudName,
+    context,
     uploadPreset,
     apiKey,
     folder,
@@ -52,6 +54,7 @@ export default class CloudinaryApiClient {
     generateSignature
   }) {
     this.cloudName = cloudName;
+    this.context = context;
     this.uploadPreset = uploadPreset;
     this.apiKey = apiKey;
     this.folder = folder;
@@ -70,15 +73,16 @@ export default class CloudinaryApiClient {
   async upload(file, { onUploadProgress = undefined }) {
     const params = {
       upload_preset: this.uploadPreset,
+      context: this.context,
       folder: this.folder,
-      tags: this.tags.join(','),
+      tags: this.tags.join(","),
       timestamp: new Date().getTime()
     };
 
     const signature = await this.generateSignature(params);
 
     if (!signature) {
-      throw new Error('Could not generate signature');
+      throw new Error("Could not generate signature");
     }
 
     params.signature = signature;
