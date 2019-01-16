@@ -36,15 +36,16 @@ export default class CloudinaryApiClient {
   /**
    * @param {Object}    params
    * @param {String}    [params.cloudName]
+   * @param {Object}    [params.context]
    * @param {String}    [params.uploadPreset]
    * @param {String}    [params.apiKey]
    * @param {String}    [params.folder]
-   * @param {String}    [params.cloudName]
    * @param {String[]}  [params.tags]
    * @param {Function}  [params.generateSignature]
    */
   constructor({
     cloudName,
+    context,
     uploadPreset,
     apiKey,
     folder,
@@ -52,6 +53,7 @@ export default class CloudinaryApiClient {
     generateSignature
   }) {
     this.cloudName = cloudName;
+    this.context = context;
     this.uploadPreset = uploadPreset;
     this.apiKey = apiKey;
     this.folder = folder;
@@ -70,6 +72,7 @@ export default class CloudinaryApiClient {
   async upload(file, { onUploadProgress = undefined }) {
     const params = {
       upload_preset: this.uploadPreset,
+      context: this.context,
       folder: this.folder,
       tags: this.tags.join(','),
       timestamp: new Date().getTime()

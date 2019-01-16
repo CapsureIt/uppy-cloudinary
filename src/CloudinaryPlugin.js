@@ -24,6 +24,7 @@ export default class CloudinaryPlugin extends Plugin {
       id,
       apiKey,
       cloudName,
+      context,
       folder,
       tags,
       uploadPreset,
@@ -36,6 +37,7 @@ export default class CloudinaryPlugin extends Plugin {
     this.apiClient = new CloudinaryApiClient({
       apiKey: apiKey,
       cloudName: cloudName,
+      context: context,
       folder: folder,
       tags: tags,
       uploadPreset: uploadPreset,
