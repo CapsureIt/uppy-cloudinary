@@ -40,7 +40,6 @@ export default class CloudinaryApiClient {
    * @param {String}    [params.uploadPreset]
    * @param {String}    [params.apiKey]
    * @param {String}    [params.folder]
-   * @param {String}    [params.cloudName]
    * @param {String[]}  [params.tags]
    * @param {Function}  [params.generateSignature]
    */
